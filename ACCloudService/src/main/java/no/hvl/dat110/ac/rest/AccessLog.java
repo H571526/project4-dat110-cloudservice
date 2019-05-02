@@ -15,31 +15,29 @@ public class AccessLog {
 		cid = new AtomicInteger(0);
 	}
 
-	// TODO: add an access entry for the message and return assigned id
+	// TODO: add an access entry for the message and return assigned id -- DONE
 	public int add(String message) {
-		
-		int id = 0;
-		
+		int id = cid.incrementAndGet();
+		log.put(id, new AccessEntry(id, message));
 		return id;
 	}
 		
-	// TODO: retrieve a specific access entry 
+	// TODO: retrieve a specific access entry -- DONE
 	public AccessEntry get(int id) {
-		
-		return null;
+		return log.get(id);
 		
 	}
 	
-	// TODO: clear the access entry log
+	// TODO: clear the access entry log --DONE
 	public void clear() {
-		
+		log.clear();
+		cid.set(0);
 	}
 	
-	// TODO: JSON representation of the access log
+	// TODO: JSON representation of the access log -- DONE
 	public String toJson () {
-    	
-		String json = null;
-    	
+    	Gson gson = new Gson();
+    	String json = gson.toJson(log);
     	return json;
     }
 }
