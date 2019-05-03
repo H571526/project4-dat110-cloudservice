@@ -58,7 +58,7 @@ public class App {
 		
 		put ("/accessdevice/code", (req, res) -> {
 			accesscode = gson.fromJson(req.body(), AccessCode.class);
-			return "";
+			return gson.toJson(accesscode);
 		});
 		
 		get ("/accessdevice/code", (req, res) -> {
